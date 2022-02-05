@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/ethereum-logo.png" />
-  <HelloWorld msg="以太坊(EVM) 链下签名 & 链上验证"/>
+  <HelloWorld msg="Ethereum (EVM) sign off-chain & verify on-chain"/>
 </template>
 
 <script>
