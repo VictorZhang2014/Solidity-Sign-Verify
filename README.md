@@ -25,9 +25,12 @@ npm run build
 
 # EIP712
 
-<img src="images/ether-mail-photo.png" width="350" alt="Mail TypedDataV4" />
-<img src="images/two-struct-eip712.png" width="350" alt="Multiple Struct to TypedDataV4" />
+<img src="images/ether-mail-photo.png" width="350" alt="Mail TypedDataV4" /> <img src="images/two-struct-eip712.png" width="350" alt="Multiple Struct to TypedDataV4" />
 
+[Send Email Contract](./contracts/EIP712Mail.sol)
+[Send Email Contract and Javascript](./src/components/MailExample.vue)
+[Common Multiple Struct Contract](./contracts/EIP712Example.sol)
+[Common Multiple Struct Contract and Javascript](./src/components/HelloWorld.vue)
 
 <br/>
 <br/>

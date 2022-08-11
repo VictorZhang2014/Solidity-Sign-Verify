@@ -180,14 +180,26 @@
                     {
                         "components": [
                             {
-                                "internalType": "address[]",
-                                "name": "alternate",
-                                "type": "address[]"
+                                "components": [
+                                    {
+                                        "internalType": "address",
+                                        "name": "owner",
+                                        "type": "address"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "timelock",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712Example.AlternateOwner[]",
+                                "name": "alternates",
+                                "type": "tuple[]"
                             },
                             {
-                                "internalType": "uint256[]",
-                                "name": "timelock",
-                                "type": "uint256[]"
+                                "internalType": "string",
+                                "name": "demo",
+                                "type": "string"
                             }
                         ],
                         "internalType": "struct EIP712Example.InitData",

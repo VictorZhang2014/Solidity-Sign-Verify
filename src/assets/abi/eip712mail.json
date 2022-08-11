@@ -58,6 +58,28 @@
                         "internalType": "address",
                         "name": "wallet",
                         "type": "address"
+                    },
+                    {
+                        "components": [
+                            {
+                                "internalType": "string",
+                                "name": "home",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "phone",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "age",
+                                "type": "uint256"
+                            }
+                        ],
+                        "internalType": "struct EIP712EtherMail.HomeAddress",
+                        "name": "addr",
+                        "type": "tuple"
                     }
                 ],
                 "internalType": "struct EIP712EtherMail.Person",
@@ -91,6 +113,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",
@@ -108,6 +152,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",
@@ -122,6 +188,42 @@
                 ],
                 "internalType": "struct EIP712EtherMail.Mail",
                 "name": "mail",
+                "type": "tuple"
+            }
+        ],
+        "name": "hash",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "home",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "phone",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "age",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct EIP712EtherMail.HomeAddress",
+                "name": "addr",
                 "type": "tuple"
             }
         ],
@@ -192,25 +294,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "signer",
-                "type": "address"
-            }
-        ],
-        "name": "test",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "components": [
                     {
                         "components": [
@@ -223,6 +306,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",
@@ -240,6 +345,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",
@@ -298,6 +425,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",
@@ -315,6 +464,28 @@
                                 "internalType": "address",
                                 "name": "wallet",
                                 "type": "address"
+                            },
+                            {
+                                "components": [
+                                    {
+                                        "internalType": "string",
+                                        "name": "home",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "string",
+                                        "name": "phone",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "internalType": "uint256",
+                                        "name": "age",
+                                        "type": "uint256"
+                                    }
+                                ],
+                                "internalType": "struct EIP712EtherMail.HomeAddress",
+                                "name": "addr",
+                                "type": "tuple"
                             }
                         ],
                         "internalType": "struct EIP712EtherMail.Person",

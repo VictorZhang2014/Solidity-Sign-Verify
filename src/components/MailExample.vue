@@ -40,15 +40,21 @@ export default {
                 { name: 'chainId', type: 'uint256' },
                 { name: 'verifyingContract', type: 'address' },
             ],
+            HomeAddress: [
+                { name: 'home', type: 'string' },
+                { name: 'phone', type: 'string' },
+                { name: 'age', type: 'uint256' },
+            ],
             Person: [
                 { name: 'name', type: 'string' },
-                { name: 'wallet', type: 'address' }
+                { name: 'wallet', type: 'address' },
+                { name: 'addr', type: 'HomeAddress' }
             ],
             Mail: [
                 { name: 'from', type: 'Person' },
                 { name: 'to', type: 'Person' },
                 { name: 'contents', type: 'string' }
-            ],
+            ]
         },
         primaryType: 'Mail',
         domain: {
@@ -61,18 +67,28 @@ export default {
             from: {
                 name: 'Cow',
                 wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+                addr: {
+                    home: "The USA",
+                    phone: "123456",
+                    age: 20
+                }
             },
             to: {
                 name: 'Bob',
                 wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+                addr: {
+                    home: "United Kindom",
+                    phone: "098765",
+                    age: 22
+                }
             },
             contents: 'Hello, Bob!',
         },
     }
 
 
-    // const privateKey = EthUtil.keccakFromString('cow', 256); // to generate a new private key
-    const _privateKey = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+    // this.$privateKey = EthUtil.keccakFromString('cow', 256); // to generate a new private key
+    const _privateKey = "Your private key to put it here"
     this.privateKey = EthUtil.toBuffer(_privateKey)
     this.from = EthUtil.bufferToHex(EthUtil.privateToAddress(this.privateKey));
     console.log("from=", this.from) 
@@ -103,8 +119,8 @@ export default {
     },
 
     recoverSigner: function(msgHash, sig) {
-        const pubKey = EthUtil.ecrecover(msgHash, sig.v, sig.r, sig.s)
-        const addrBuf = EthUtil.pubToAddress(pubKey);
+        const pubKey    = EthUtil.ecrecover(msgHash, sig.v, sig.r, sig.s)
+        const addrBuf   = EthUtil.pubToAddress(pubKey);
         const signer    = EthUtil.bufferToHex(addrBuf);
         console.log("To recover and the signer is ", signer,)
         console.log(signer.toLowerCase() == this.from.toLowerCase() ? "Verified Success!" : "Failed to verify")
@@ -112,12 +128,12 @@ export default {
 
     testByContract: async function () {
       const web3 = new Web3("http://localhost:8545")
-      const contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+      const contractAddress = "0x1291Be112d480055DaFd8a610b7d1e203891C274"
       const myContract = new web3.eth.Contract(EIP712_MAIL_EXAMPLE_ABI, contractAddress);
 
       const mail = [
-        ['Cow', '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826'],
-        ['Bob', '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'],
+        ['Cow', '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826', ["The USA","123456",20]],
+        ['Bob', '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB', ["United Kindom","098765",22]],
         "Hello, Bob!"
       ]
 

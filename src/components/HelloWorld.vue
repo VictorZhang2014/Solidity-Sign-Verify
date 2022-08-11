@@ -156,8 +156,13 @@ export default {
         version: 1,
         didOwner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
         initData: {
-          alternate: ["0xBD5924Ad1C6976E9D12F63a86A45c60334777D80"],
-          timelock: [6 * 60 * 60]
+          alternates: [
+            {
+              owner: "0xBD5924Ad1C6976E9D12F63a86A45c60334777D80",
+              timelock: 6 * 60 * 60
+            }
+          ],
+          demo: "Test"
         }
       }
       this.typedData = {
@@ -174,8 +179,12 @@ export default {
               { name: 'initData', type: 'InitData' },
             ],
             InitData: [
-              { name: 'alternate', type: 'address[]' },
-              { name: 'timelock', type: 'uint256[]' },
+              { name: 'alternates', type: 'AlternateOwner[]' },
+              { name: 'demo', type: 'string' },
+            ],
+            AlternateOwner: [
+              { name: 'owner', type: 'address' },
+              { name: 'timelock', type: 'uint256' },
             ]
           },
           primaryType: 'CreateOwnerParam',
@@ -189,8 +198,13 @@ export default {
             "version": this.dataMsg.version,
             "didOwner": this.dataMsg.didOwner,
             "initData": { 
-              "alternate": this.dataMsg.initData.alternate,
-              "timelock": this.dataMsg.initData.timelock, 
+              "alternates": [
+                {
+                  "owner": this.dataMsg.initData.alternates[0].owner,
+                  "timelock": this.dataMsg.initData.alternates[0].timelock, 
+                }
+              ],
+              "demo": this.dataMsg.initData.demo
             }
           },
       }
@@ -199,7 +213,7 @@ export default {
 
     verifyEIP712Signature: async function () {
       const web3 = new Web3("http://localhost:8545")
-      const contractAddress = "0x8f86403A4DE0BB5791fa46B8e795C547942fE4Cf"
+      const contractAddress = "0x9d4454B023096f34B160D6B654540c56A1F81688"
       const myContract = new web3.eth.Contract(EIP712_EXAMPLE_ABI, contractAddress);
       
 
@@ -216,8 +230,13 @@ export default {
         this.dataMsg.version, 
         this.dataMsg.didOwner, 
         [
-          this.dataMsg.initData.alternate, 
-          this.dataMsg.initData.timelock
+          [
+            [
+              this.dataMsg.initData.alternates[0].owner, 
+              this.dataMsg.initData.alternates[0].timelock
+            ]
+          ],
+          this.dataMsg.initData.demo
         ] 
       ]
       const result = await myContract.methods.testStructData3(param, this.dataMsg.sign).call();
