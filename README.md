@@ -1,4 +1,4 @@
-# Solidity Sign off-chain & Verify on-chain
+# Solidity Sign off-chain & Verify on-chain (EIP191 and EIP721)
 
 This is a project which signs message off-chain and verifies signature on-chain inside Solidity code.
 
@@ -22,6 +22,18 @@ Now, you're ready to open http://localhost:8080/ on Chrome browser, and you can 
 npm run build
 ```
 
+
+# EIP712
+
+![Mail TypedData V4](images/ether-mail-photo.png)
+![Mail TypedData V4](images/two-struct-eip712.png)
+
+
+
+<br/>
+<br/>
+
+# EIP191 
 
 ### 1. Connect With MetaMask
 ```

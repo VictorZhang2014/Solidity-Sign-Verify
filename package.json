@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "ethereumjs-abi": "^0.6.8",
+    "ethereumjs-util": "^7.1.5",
     "vue": "^3.0.0",
-    "web3": "^1.6.1"
+    "web3": "^1.7.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
