@@ -25,9 +25,8 @@ npm run build
 
 # EIP712
 
-![Mail TypedData V4](images/ether-mail-photo.png)
-![Mail TypedData V4](images/two-struct-eip712.png)
-
+<img src="images/ether-mail-photo.png" width="350" alt="Mail TypedDataV4" />
+<img src="images/two-struct-eip712.png" width="350" alt="Multiple Struct to TypedDataV4" />
 
 
 <br/>
