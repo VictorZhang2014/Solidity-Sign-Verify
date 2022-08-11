@@ -26,20 +26,12 @@ contract EIP712Example {
         address didOwner;
         InitData initData;
     }
-    // struct InitData {
-    //     address[] alternate;
-    //     uint256[] timelock;
-    // }
     struct InitData {
-        AlternateOwner[] alternates;
-        string demo;
+        address[] alternates;
+        uint256[] timelocks;
     }
-    struct AlternateOwner {
-        address owner;
-        uint256 timelock;
-    }
-    bytes32 public constant CREATE_OWNER_PARAM_TYPEHASH = keccak256("CreateOwnerParam(uint256 version,address didOwner,InitData initData)InitData(AlternateOwner[] alternates,string demo)AlternateOwner(address owner,uint256 timelock)");
-    bytes32 public constant INIT_DATA_TYPEHASH = keccak256("InitData(AlternateOwner[] alternates,string demo)AlternateOwner(address owner,uint256 timelock)");
+    bytes32 public constant CREATE_OWNER_PARAM_TYPEHASH = keccak256("CreateOwnerParam(uint256 version,address didOwner,InitData initData)InitData(address[] alternates,uint256[] timelocks)");
+    bytes32 public constant INIT_DATA_TYPEHASH = keccak256("InitData(address[] alternates,uint256[] timelocks)");
 
     bytes32 DOMAIN_SEPARATOR;
 
@@ -69,23 +61,11 @@ contract EIP712Example {
     }
 
     function testStructData3(CreateOwnerParam memory param, bytes memory signature) public view returns (address) {
-        // bytes32 initData_ = keccak256(abi.encode(
-        //     INIT_DATA_TYPEHASH, 
-        //     keccak256(abi.encodePacked(param.initData.alternate)),
-        //     keccak256(abi.encodePacked(param.initData.timelock))
-        // ));
-
-        bytes32[] memory datalist = new bytes32[](param.initData.alternates.length);
-        for (uint i = 0; i < param.initData.alternates.length; i++) {
-            AlternateOwner memory ao = param.initData.alternates[i];
-            datalist[i] = keccak256(abi.encode(keccake256("AlternateOwner(address owner,uint256 timelock)"), ao.owner, ao.timelock));
-        }
         bytes32 initData_ = keccak256(abi.encode(
             INIT_DATA_TYPEHASH, 
-            keccak256(abi.encodePacked(datalist)),
-            keccak256(bytes(param.initData.demo))
+            keccak256(abi.encodePacked(param.initData.alternates)),
+            keccak256(abi.encodePacked(param.initData.timelocks))
         ));
-
         bytes32 dataHashStruct = keccak256(abi.encode(CREATE_OWNER_PARAM_TYPEHASH, param.version, param.didOwner, initData_));
         bytes32 digest = keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, dataHashStruct));
         address signer = recoverSigner(digest, signature);
