@@ -1,18 +1,23 @@
 <template>
   <img alt="Vue logo" src="./assets/ethereum-logo.png" />
-  <HelloWorld msg="Ethereum (EVM) blockchains"/>
-  <!-- <MailExample msg="Mail Example"/> -->
+  <!-- <HelloWorld msg="Ethereum (EVM) blockchains"/> -->
+  <MailExample msg="Mail Example"/>
+  <!-- <MailExample_Two_Structs msg="Mail Example"/> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-// import MailExample from './components/MailExample.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import MailExample from './components/MailExample.vue'
+// import MailExample_Two_Structs from './components/MailExample_Two_Structs.vue'
+
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    // MailExample
+    // HelloWorld,
+    MailExample,
+    // MailExample_Two_Structs
   }
 }
 </script>

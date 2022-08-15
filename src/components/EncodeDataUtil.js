@@ -41,6 +41,7 @@ export default class EncodeDataUtil {
         for (let type of deps) {
             result += `${type}(${this.types[type].map(({ name, type }) => `${type} ${name}`).join(',')})`;
         }
+        // console.log("primaryType=" + primaryType + " : "+ result)
         return result;
     }
 
@@ -55,11 +56,16 @@ export default class EncodeDataUtil {
         // Add typehash
         encTypes.push('bytes32');
         encValues.push(this.typeHash(primaryType));
-
+        console.log(primaryType + "=", EthUtil.bufferToHex(this.typeHash(primaryType)))
+ 
         // Add field contents
         for (let field of this.types[primaryType]) {
             let value = data[field.name];
-            if (field.type == 'string' || field.type == 'bytes') {
+            if (field.type == 'string') {
+                encTypes.push('bytes32');
+                value = EthUtil.keccakFromString(value, 256);
+                encValues.push(value);
+            } else if (field.type == 'bytes') {
                 encTypes.push('bytes32');
                 value = EthUtil.keccakFromString(value, 256);
                 encValues.push(value);
@@ -74,7 +80,7 @@ export default class EncodeDataUtil {
                 encValues.push(value);
             }
         }
-        
+        // console.log(encTypes, encValues)
         return abi.rawEncode(encTypes, encValues);
     }
 
@@ -84,16 +90,23 @@ export default class EncodeDataUtil {
 
     signHash(domain, primaryType, message) {
         const DOMAIN_SEPARATOR = this.structHash('EIP712Domain', domain)
-        // console.log("DOMAIN_SEPARATOR=", EthUtil.bufferToHex(DOMAIN_SEPARATOR))
-        const dataHash = this.structHash(primaryType, message)
-        // console.log("Mail dataHash=", EthUtil.bufferToHex(dataHash))
+        console.log("DOMAIN_SEPARATOR=", EthUtil.bufferToHex(DOMAIN_SEPARATOR))
+       
+        const encodedData = this.encodeData(primaryType, message)
+        console.log("encodedData=", EthUtil.bufferToHex(encodedData))
+
+        const hashEncodedData = EthUtil.keccak256(encodedData)
+        console.log("hashEncodedData=", EthUtil.bufferToHex(hashEncodedData))
+
         return EthUtil.keccak256(
             Buffer.concat([
                 Buffer.from('1901', 'hex'), 
                 DOMAIN_SEPARATOR,
-                dataHash,
+                hashEncodedData,
             ]),
         );
     }
+
+
 
 }

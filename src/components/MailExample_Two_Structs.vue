@@ -17,7 +17,7 @@ import Web3 from "web3";
 const EthUtil = require('ethereumjs-util');
 
 import EncodeDataUtil from "./EncodeDataUtil"
-const EIP712_MAIL_EXAMPLE_ABI = require("../assets/abi/eip712mail.json")
+const EIP712_MAIL_EXAMPLE_ABI = require("../assets/abi/eip712mail_two_structs.json")
 
 
 export default {
@@ -29,7 +29,7 @@ export default {
   mounted() {
     let chainId = window.ethereum.chainId
     if (chainId == null || chainId == undefined) {
-        chainId = 31337
+        chainId = 223344 //31337
     }
     this.typedData = {
         types: {
@@ -39,15 +39,9 @@ export default {
                 { name: 'chainId', type: 'uint256' },
                 { name: 'verifyingContract', type: 'address' },
             ],
-            HomeAddress: [
-                { name: 'home', type: 'string' },
-                { name: 'phone', type: 'string' },
-                { name: 'age', type: 'uint256' },
-            ],
             Person: [
                 { name: 'name', type: 'string' },
-                { name: 'wallet', type: 'address' },
-                { name: 'addr', type: 'HomeAddress' }
+                { name: 'wallet', type: 'address' }
             ],
             Mail: [
                 { name: 'from', type: 'Person' },
@@ -65,21 +59,11 @@ export default {
         message: {
             from: {
                 name: 'Cow',
-                wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-                addr: {
-                    home: "The USA",
-                    phone: "123456",
-                    age: 20
-                }
+                wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826'
             },
             to: {
                 name: 'Bob',
-                wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-                addr: {
-                    home: "United Kindom",
-                    phone: "098765",
-                    age: 22
-                }
+                wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
             },
             contents: 'Hello, Bob!',
         },
@@ -97,7 +81,7 @@ export default {
     testByMetaMask: function() { 
         const encodeUtil = new EncodeDataUtil(this.typedData.types)
         const msgHash = encodeUtil.signHash(this.typedData.domain, this.typedData.primaryType, this.typedData.message)
-        console.log("digest=", EthUtil.bufferToHex(msgHash))
+
 
         // const web3 = new Web3("http://localhost:8545")
   
@@ -200,14 +184,14 @@ export default {
     },
 
     testByContract: async function () {
-      const web3 = new Web3("http://localhost:8545")
-      // const web3 = new Web3("https://geth.mm.comeonbtc.com:8443")
-      const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+      // const web3 = new Web3("http://localhost:8545")
+      const web3 = new Web3("https://geth.mm.comeonbtc.com:8443")
+      const contractAddress = "0xD42912755319665397FF090fBB63B1a31aE87Cee"
       const myContract = new web3.eth.Contract(EIP712_MAIL_EXAMPLE_ABI, contractAddress);
 
       const mail = [
-        ['Cow', '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826', ["The USA","123456",20] ],
-        ['Bob', '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB', ["United Kindom","098765",22] ],
+        ['Cow', '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826' ],
+        ['Bob', '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB' ],
         "Hello, Bob!"
       ]
 
